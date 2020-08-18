@@ -3,17 +3,19 @@
 # =================================== #
 # Axemoor Bootstrap Initialize Script #
 # =================================== #
+# Raspbian Edition
 
 # First, some housekeeping
 echo "Beginning system update and software install"
 sudo apt update
 sudo apt upgrade -y
 echo "Software update complete"
-$install1="apache2 git openssh systemctl
-atom"
-$install2="mysql-server php7.4"
+$install1="apache2 git systemctl atom"
+$install2="php libcache2-mod-php"
+$install3="mariadb-server"
 sudo apt install "$install1" -y
-
+sudo systemctl enable ssh
+sudo systemctl start ssh
 echo "Done installing Apache2"
 # Apache Config
 echo "Apache config starting now"
@@ -37,7 +39,22 @@ sudo systemctl restart apache2
 #echo "Apache status is"
 #sudo systemctl status apache2
 echo "Done configuring Apache. Now installing additional software."
-sudo apt install "$install2" -y
+sudo apt install "$install2" -y #php
+sudo apt-get install "$install3" -y #mariadb-server
+echo "This next section will ask you for input."
+echo "Recommended answers are provided here. Copy and paste this list"
+echo "to someplace where you can reference it while you answer these"
+echo "questions."
+echo "1. Enter the current password for root - this can be the same as your"
+echo "machine's root password. Enter the password at the prompt."
+echo "2. Change the root password: Choose 'n'"
+echo "3. Remove anonymous users: Choose 'y'"
+echo "4. Disallow root login remotely: Choose 'y'"
+echo "5. Remove test database and access: Choose 'y'"
+echo "6. Reload privilege tables: Choose 'y'"
+sudo mysql_secure_installation
+sudo apt install php-mysql -y
+sudo service apache2 restart
 # git Config
 read -p "Enter your name (may use SCA name here):" name
 git config --global user.name "$name"
@@ -49,7 +66,7 @@ cd /var/www/axemoor/public_html
 git clone https://github.com/Axemoor/website.git .
 
 # clone the Axemoor help system
-mkdir ~/help
+mkdir $HOME/help
 git clone https://github.com/Cordelya/axemoor-bootstrap.git $HOME/help 
 PATH=$PATH:$HOME/help/
 chmod +x axemoor.sh
