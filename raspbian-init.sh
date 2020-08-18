@@ -11,8 +11,8 @@ sudo apt update
 sudo apt upgrade -y
 echo "Software update complete"
 
-$install2="php libcache2-mod-php git systemctl"
-$install3="mariadb-server"
+$install2=" php libcache2-mod-php git systemctl"
+$install3=" mariadb-server"
 sudo apt install -y apache2 
 echo "Done with Apache2"
 echo "Enable & Start SSH"
@@ -37,7 +37,7 @@ fi
 if [ ! -f "/etc/apache2/sites-available/axemoor.net.conf" ];
   then
   sudo touch /etc/apache2/sites-available/axemoor.net.conf
-  $newconf="/etc/apache2/sites-available/axemoor.net.conf"
+   newconf="/etc/apache2/sites-available/axemoor.net.conf"
   sudo echo "<VirtualHost *:80>
       ServerAdmin webminister@axemoor.net
       ServerName axemoor.net
@@ -48,6 +48,7 @@ if [ ! -f "/etc/apache2/sites-available/axemoor.net.conf" ];
   </VirtualHost>" >> $newconf
   sudo a2ensite axemoor.net
   sudo a2dissite 000-default
+  systemctl reload apache2
 fi
 
 echo "Attempting to restart Apache. Hang on."
@@ -87,5 +88,5 @@ mkdir $HOME/help
 git clone https://github.com/Cordelya/axemoor-bootstrap.git $HOME/help 
 PATH=$PATH:$HOME/help/
 chmod +x $HOME/help/axemoor.sh
-echo "Setup is complete. Please type "axemoor.sh" at the command prompt and
-press the Enter key to access the help system"
+echo "Setup is complete. Please return to the setup instructions for the next
+steps"
