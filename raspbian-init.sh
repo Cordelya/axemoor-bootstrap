@@ -7,13 +7,13 @@
 
 # First, some housekeeping
 echo "Beginning software update"
-sudo apt update > /dev/null
-sudo apt upgrade > -y /dev/null
+sudo apt update
+sudo apt upgrade -y
 echo "Software update complete"
 
 $install2="php libcache2-mod-php git systemctl"
 $install3="mariadb-server"
-sudo apt install apache2 -y > /dev/null
+sudo apt install -y apache2 
 echo "Done with Apache2"
 echo "Enable & Start SSH"
 sudo systemctl enable ssh
@@ -38,28 +38,27 @@ if [ ! -f "/etc/apache2/sites-available/axemoor.net.conf" ];
   then
   sudo touch /etc/apache2/sites-available/axemoor.net.conf
   $newconf="/etc/apache2/sites-available/axemoor.net.conf"
-  echo '<VirtualHost *:80>' >> $newconf
-  echo '    ServerAdmin webminister@axemoor.net' >> $newconf
-  echo '    ServerName axemoor.net' >> $newconf
-  echo '    ServerAlias www.axemoor.net' >> $newconf
-  echo '    DocumentRoot /var/www/html' >> $newconf
-  echo '    ErrorLog ${APACHE_LOG_DIR}/error.log' >> $newconf
-  echo '    CustomLog ${APACHE_LOG_DIR}/access.log combined' >> $newconf
-  echo '</VirtualHost>' >> $newconf
-  sudo a2ensite axemoor.net.conf
-  sudo a2dissite 000-default.conf
+  sudo echo "<VirtualHost *:80>
+      ServerAdmin webminister@axemoor.net
+      ServerName axemoor.net
+      ServerAlias www.axemoor.net
+      DocumentRoot /var/www/axemoor/public_html
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
+  </VirtualHost>" >> $newconf
+  sudo a2ensite axemoor.net
+  sudo a2dissite 000-default
 fi
 
 echo "Attempting to restart Apache. Hang on."
-sudo systemctl restart apache2
+sudo systemctl restart apache2 --no-pager
 echo "Apache status is"
-sudo systemctl status apache2
+sudo systemctl status apache2 --no-pager
 echo "Done configuring Apache. Now installing additional software."
 sudo apt install "$install2" -y #php libcache2-mod-php git systemctl
 sudo apt-get install "$install3" -y #mariadb-server
-RED='\033[0;31m'
-NC='\033[0m'
-echo "${red}This next section will ask you for input."
+
+echo "$(tput setaf 3)This next section will ask you for input."
 echo "Recommended answers are provided here. Copy and paste this list"
 echo "to someplace where you can reference it while you answer these"
 echo "questions."
@@ -69,7 +68,8 @@ echo "2. Change the root password: Choose 'n'"
 echo "3. Remove anonymous users: Choose 'y'"
 echo "4. Disallow root login remotely: Choose 'y'"
 echo "5. Remove test database and access: Choose 'y'"
-echo "6. Reload privilege tables: Choose 'y'${NC}"
+echo "6. Reload privilege tables: Choose 'y' $(tput setaf 0)"
+
 sudo mysql_secure_installation
 sudo apt install php-mysql -y
 sudo service apache2 restart
@@ -80,13 +80,12 @@ read -p "Enter your email address (DO NOT use webminister@axemoor.net):" email
 git config --global user.email "$email"
 
 # clone the Axemoor website repo
-cd /var/www/axemoor/public_html
-git clone https://github.com/Axemoor/website.git .
+git clone https://github.com/Axemoor/website.git /var/www/axemoor/public_html
 
 # clone the Axemoor help system
 mkdir $HOME/help
 git clone https://github.com/Cordelya/axemoor-bootstrap.git $HOME/help 
 PATH=$PATH:$HOME/help/
-chmod +x axemoor.sh
+chmod +x $HOME/help/axemoor.sh
 echo "Setup is complete. Please type "axemoor.sh" at the command prompt and
 press the Enter key to access the help system"
