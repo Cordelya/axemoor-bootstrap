@@ -24,11 +24,21 @@ Built on and for Ubuntu and/or Raspbian. May work with other distros. Open a new
 * If you installed an OS version with a windowed desktop environment, launch Terminal
 * At the command prompt, type
 
+### If you're using Raspbian
 ```
-$ curl https://github.com/Cordelya/axemoor-bootstrap/[FILE} ## note: this file doesn't exist yet, so currently this will fail
-$ chmod +x [FILE] ## note: this won't work until the line above works
-$ [FILE] ## once the first line works, this will run the bootstrap file
-```
+$ curl https://raw.githubusercontent.com/Cordelya/axemoor-bootstrap/master/raspbian-init.sh > $HOME/raspbian-init.sh
+$ chmod +x $HOME/raspbian-init.sh # this makes the file executable
+$ PATH=$PATH:$HOME # this tells bash where to find the file
+$ raspbian-init.sh # this begins the install and config process
+````
+### If you're using Ubuntu
+````
+# On Ubuntu:
+$ curl https://raw.githubusercontent.com/Cordelya/axemoor-bootstrap/master/ubuntu-init.sh > $HOME/ubuntu-init.sh # Ubuntu
+$ chmod +x $HOME/ubuntu-init.sh # this makes the file executable
+$ PATH=$PATH:$HOME # this tells bash where to find the file
+$ ubuntu-init.sh # this begins the install and config process
+````
 
 The first line downloads the file. The second line makes it executable. The third line runs the file. You may be prompted to enter the password for the user *root*, so have it handy. The file will install all of the necessary software, do initial webserver configuration, and do initial git configuration, including making a new directory, "help" and cloning this repository to that location, which gives you access to the help files. Expect the install portion to take some time. Go do something else for 10 minutes and come back.
 
