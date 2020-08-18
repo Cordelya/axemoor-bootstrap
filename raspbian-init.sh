@@ -11,7 +11,7 @@ sudo apt update
 sudo apt upgrade -y
 echo "Software update complete"
 
-$install2=" php libcache2-mod-php git systemctl"
+
 $install3=" mariadb-server"
 sudo apt install -y apache2 
 echo "Done with Apache2"
@@ -56,7 +56,11 @@ sudo systemctl restart apache2 --no-pager
 echo "Apache status is"
 sudo systemctl status apache2 --no-pager
 echo "Done configuring Apache. Now installing additional software."
-sudo apt install "$install2" -y #php libcache2-mod-php git systemctl
+
+sudo apt-get install php
+sudo apt-get install libcache2-mod-php
+sudo apt-get install git
+sudo apt-get install systemctl
 sudo apt-get install "$install3" -y #mariadb-server
 
 echo "$(tput setaf 3)This next section will ask you for input."
