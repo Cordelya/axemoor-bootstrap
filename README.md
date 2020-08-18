@@ -2,6 +2,8 @@
 
 **CAUTION: This repo is still under initial development and is untested. Do not follow these instructions until this line disappears from this file**
 
+If you are helping to test these, make sure you grab from the appropriate branch for the time being.
+
 This is a collection of bash scripts and help files designed to facilitate setting up a web development environment on a new linux install for Axemoor webministers, with heavy support for git on the CLI.
 Built on and for Ubuntu and/or Raspbian. May work with other distros. Open a new issue to tell me about how it went with a different OS and we'll see about adding compatibility.
 
