@@ -52,7 +52,7 @@ $ ubuntu-init.sh # this begins the install and config process
 $ bash *****-init.sh # run the init script (use the right file name) with "bash" preceding it
 ````
 
-The first line downloads the file. The second line makes it executable. The third line runs the file. You may be prompted to enter the password for the user *root*, so have it handy. The file will install all of the necessary software, do initial webserver configuration, and do initial git configuration, including making a new directory, "help" and cloning this repository to that location, which gives you access to the help files\[[1](help)\]. Expect the install portion to take some time. Go do something else for 10 minutes and come back.
+The first line downloads the file. The second line makes it executable. The third line runs the file. You may be prompted to enter the password for the user *root*, so have it handy. The file will install all of the necessary software, do initial webserver configuration, and do initial git configuration, including making a new directory, "help" and cloning this repository to that location, which gives you access to the help files\[[1](#help)\]. Expect the install portion to take some time. Go do something else for 10 minutes and come back.
 
 ## End-user intervention
 There are some actions you, the user must take before you are fully set up. They are:
