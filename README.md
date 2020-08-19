@@ -18,11 +18,12 @@ Built on and for Ubuntu and/or Raspbian. May work with other distros. Open a new
 * If you don't have a GitHub account, create one. The free level is sufficient for what you need.
 * Install the OS. Options include:
     * Ubuntu:
-         * installed directly on a computer (not tested yet)
-         * in a VM (not tested yet)
-         * in Windows 10 Subsystem for Linux (minimal testing has been done at this time - needs work)
-         * on a Raspberry Pi (not tested yet)
-    * Raspbian (active testing in progress)
+        * installed directly on a computer (not tested yet)
+        * in a VM (not tested yet)
+        * in Windows 10 Subsystem for Linux (minimal testing has been done at this time - needs work)
+        * on a Raspberry Pi (testing in progress)
+    * Debian:
+        * Raspbian on a Raspberry Pi (mostly stable)
 * If using a freshly-burned Raspberry Pi distro, let it initialize and if it offers to update, let it do that as well. 
 * Create a non-root user if one doesn't already exist
     * Must be in the SUDOers group
