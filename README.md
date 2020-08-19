@@ -17,12 +17,16 @@ Built on and for Ubuntu and/or Raspbian. May work with other distros. Open a new
 ## First Steps
 * If you don't have a GitHub account, create one. The free level is sufficient for what you need.
 * Install the OS. Options include:
-    * Ubuntu installed directly on a computer
-    * Ubuntu in a VM
-    * Ubuntu in Windows 10 Subsystem for Linux
-    * Raspbian for Raspberry Pi
-* Create a non-root user
-    * In the case of Raspbian, change the Pi and root passwords (and record the new ones someplace safe - but not so safe you can't find them later!)
+    * Ubuntu:
+         * installed directly on a computer (not tested yet)
+         * in a VM (not tested yet)
+         * in Windows 10 Subsystem for Linux (minimal testing has been done at this time - needs work)
+         * on a Raspberry Pi (not tested yet)
+    * Raspbian (active testing in progress)
+* If using a freshly-burned Raspberry Pi distro, let it initialize and if it offers to update, let it do that as well. 
+* Create a non-root user if one doesn't already exist
+    * Must be in the SUDOers group
+    * In the case of Raspbian, you already have a non-root user. Change the Pi and root passwords (and record the new ones someplace safe - but not so safe you can't find them later!)
 * If you installed an OS version with a windowed desktop environment, launch Terminal
 * At the command prompt, type
 
@@ -42,7 +46,13 @@ $ PATH=$PATH:$HOME # this tells bash where to find the file
 $ ubuntu-init.sh # this begins the install and config process
 ````
 
-The first line downloads the file. The second line makes it executable. The third line runs the file. You may be prompted to enter the password for the user *root*, so have it handy. The file will install all of the necessary software, do initial webserver configuration, and do initial git configuration, including making a new directory, "help" and cloning this repository to that location, which gives you access to the help files. Expect the install portion to take some time. Go do something else for 10 minutes and come back.
+### If running the \*****-init.sh script throws a "not found" error
+
+````
+$ bash *****-init.sh # run the init script (use the right file name) with "bash" preceding it
+````
+
+The first line downloads the file. The second line makes it executable. The third line runs the file. You may be prompted to enter the password for the user *root*, so have it handy. The file will install all of the necessary software, do initial webserver configuration, and do initial git configuration, including making a new directory, "help" and cloning this repository to that location, which gives you access to the help files\[[1](help)\]. Expect the install portion to take some time. Go do something else for 10 minutes and come back.
 
 ## End-user intervention
 There are some actions you, the user must take before you are fully set up. They are:
@@ -60,3 +70,6 @@ $ axemoor.sh # if you know the help topic keyword you're looking for, you can ty
 ````
 
 Or you can browse the help files online in this repository, under /helpfiles
+
+## Footnotes
+<a name=help />\[1\] Help files are under development and may not exist yet
