@@ -20,12 +20,12 @@ sudo systemctl start ssh
 echo "Done with SSH"
 
 # Apache Config
-echo "Apache config starting now"
 
 # Check for /var/www. If not found, apache2 install has failed 
 # and we need to abort the install.
 if [ ! -d "/var/www" ];
   then echo "Apache didn't install correctly. Aborting." && exit
+  else echo "Apache installed correctly. Continuing.."
 fi
 
 # Check for /var/www/axemoor. If it doesn't exist, make it
@@ -34,7 +34,7 @@ if [ ! -d "/var/www/axemoor" ];
   sudo mkdir /var/www/axemoor/public_html -p
   sudo chown -R $USER:$USER /var/www/axemoor/public_html
   sudo chmod -R 755 /var/www
-
+fi
 echo "Attempting to restart Apache. Hang on."
 sudo systemctl restart apache2 --no-pager
 echo "Apache status is"
@@ -58,7 +58,7 @@ machine's root password. Enter the password at the prompt.
 3. Remove anonymous users: Choose 'y'
 4. Disallow root login remotely: Choose 'y'
 5. Remove test database and access: Choose 'y'
-6. Reload privilege tables: Choose 'y' $(tput setaf 0)"
+6. Reload privilege tables: Choose 'y' $(tput setaf 7)"
 
 sudo mysql_secure_installation
 sudo apt-get install php-mysql -y
@@ -78,8 +78,7 @@ mkdir $HOME/help
 git clone https://github.com/Cordelya/axemoor-bootstrap.git $HOME/help 
 
 # copy the website configuration file to the apache2 sites-available dir
-sudo cp $HOME/help/axemoor.net.conf
-/etc/apache2/sites-available/axemoor.net.conf
+sudo cp $HOME/help/axemoor.net.conf /etc/apache2/sites-available/axemoor.net.conf
 
 # enable axemoor.net and disable the default site
 sudo a2ensite axemoor.net  
@@ -92,4 +91,4 @@ systemctl reload apache2
 PATH=$PATH:$HOME/help/
 chmod +x $HOME/help/axemoor.sh
 echo "Setup is complete. Please return to the setup instructions for the next
-steps"
+steps."
