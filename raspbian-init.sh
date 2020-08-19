@@ -84,11 +84,23 @@ sudo cp $HOME/help/axemoor.net.conf /etc/apache2/sites-available/axemoor.net.con
 sudo a2ensite axemoor.net  
 sudo a2dissite 000-default
 
-#reload the webserver
-systemctl reload apache2    
+# add axemoor.net to hosts file
+echo "127.0.0.1 axemoor.net" | sudo tee -a /etc/hosts
 
 # make axemoor.sh executable
 PATH=$PATH:$HOME/help/
 chmod +x $HOME/help/axemoor.sh
-echo "Setup is complete. Please return to the setup instructions for the next
-steps."
+read "Setup is complete. System reboot required. 
+
+Once your system reboot is complete, you can test this installation 
+by visiting http://axemoor.net using your local browser. 
+
+Your /etc/hosts file has been modified to direct axemoor.net to 
+the local host. Changes you make to files in 
+
+/var/www/axemoor/public_html 
+
+will appear on refresh(F5). 
+
+Press enter to continue." e
+sudo reboot
