@@ -13,7 +13,8 @@ echo "Software update complete"
 sudo apt-get install -y apache2
 
 echo "Done installing Apache2"
-echo "Enable and start SSH"
+echo "Install, Enable and start SSH"
+sudo apt-get install -y ssh
 sudo systemctl enable ssh
 sudo systemctl start ssh
 echo "Done with SSH"
@@ -58,6 +59,17 @@ mkdir $HOME/help
 git clone https://github.com/Cordelya/axemoor-bootstrap.git $HOME/help 
 PATH=$PATH:$HOME/help/
 chmod +x $HOME/help/axemoor.sh
+
+# Copy the website configuration file to the apache2 sites-available directory
+sudo cp $HOME/help/axemoor.net.conf /etc/apache2/sites-available/axemoor.net.conf
+
+# enable axemoor.net and disable the default site
+sudo a2ensite axemoor.net
+sudo a2dissite 000-default
+
+#add axemoor.net to /etc/hosts
+echo "127.0.0.1 axemoor.net" | sudo tee -a /etc/hosts
+
 echo "Setup is complete. System reboot required.
 
 Once your system reboot is complete, you can test this installation 
