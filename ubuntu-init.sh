@@ -68,7 +68,6 @@ the local host. Changes you make to files in
 
 /var/www/axemoor/public_html 
 
-will appear on refresh(F5). 
-
-Press enter to continue." e
+will appear on refresh(F5). " 
+read -rsp $'Press any key to continue...\n' -n1 key
 sudo reboot
