@@ -1,0 +1,114 @@
+This is the help file for SSH keys.
+
+  You will, at minimum, need a single pair of SSH keys to use Github with CLI
+git. If you're planning to commit to an Organization and your personal
+repositories, you'll need a second pair. This document will walk you through
+the process of creating key-pairs and setting up git to use them to connect to
+Github.
+
+Notes:
+* All command-line entries are preceeded with at $, which stands in for the $ in
+your command prompt. You don't type it in.
+* Some code lines will have a # and more text to the right. The command ends
+  just before the # and the rest is a comment. You don't type in anything that
+  is to the right of a #
+
+1. Generate a new keypair. See
+   https://gist.github.com/developius/c81f021eb5c5916013dc for more
+information. (You can copy/paste into/out of a terminal window by highlighting
+with your mouse and right-clicking. For some terminals, the right click on
+highlighted text does the copy. For others, a menu will appear and you need to
+choose "copy" from it. You then can paste the text you copied elsewhere.
+Right-click without selecting anything may paste clipboard contents at your
+insertion point.
+  For your organizational keys, give the keypair a file name that relates to the
+repository you'll use them for - to help your future self. Reference
+"repo-name" in the below example. Use an email address assigned only to you
+- don't use webminister@axemoor.net for example.
+
+Your file name should be entered as such:
+
+$ /home/[yourDir]/.ssh/repo-name_id_rsa                               
+
+You may need to locate your .ssh directory before you do this. Try the
+following from your "home" directory:                                 
+
+$ ls -a # list all items in a directory, including hidden files and folders 
+
+When you're ready to generate the keypair, type:
+
+$ ssh-keygen -t rsa -b 4096 -C your-email@email.com # case sensitive!
+
+  This will generate a keypair. You will be prompted for a passphrase. You can 
+leave it blank (press enter without typing anything) or you can enter a 
+passphrase of your choosing. If you enter a passphrase, store a copy someplace 
+secure in case you need it later. If you forget/lose the passphrase, the keys 
+may become unusable later on, and you'll have to generate a new pair. 
+
+  One way you can store your passphrase is to save a notepad file with the
+passphrase on the same flash drive as you back up your keys to. Name the
+notepad file similarly to the keys it matches. Dedicate that flash drive to 
+only storing keys and passphrases, and store it in a safe place.
+  Put it on a physical key ring with a label so you'll know what it is when you
+see it later on. Suggested label: SSH Keys. Don't store your passphrase with
+matching keys anywhere that is net accessible - keep them offline. Because
+these keys are small text files, you can use a very small capacity flash drive
+to store them. 1 GB is more than plenty. 512 MB would likely work. 
+
+Now you need to display the content of the keyfile so you can paste it into
+Github. If you aren't an admin in an organization, you may need to provide your
+organization key to someone else and they'll put it in for you. 
+  The key content must be copied verbatim and cannot be changed in any way or
+Github will fail it.
+
+Here is a way to display the key so you can select it and right-click copy it:
+
+$ less ~/.ssh/repo-name_id_rsa.pub # this displays the public key
+
+Exit less by typing "q" when you're done.
+
+Once Github has accepted the key, you can continue to the next steps:
+
+$ eval "$(ssh-agent -s)" # this will output:
+# "Agent pid ******" some numbers will appear in place of the ****
+$ ssh-add ~/.ssh/repo-name_id_rsa # this adds the key pair to your SSH helper
+$ cd ~/.ssh # enter the .ssh directory
+$ ls -a # check folder contents
+$ touch config # only do this if you have no config file here
+$ sudo chmod 644 config # only do this if you just created the config file
+$ sudo nano config # this will launch the nano editor
+
+"Github path" (below) refers to the path to a Github repository, leaving out
+the http://github.com part. Format is user/repository
+In the config file, add the following lines:
+
+Host gitreponame #replace "gitreponame" with the Github path
+Hostname github.com
+IdentityFile ~/.ssh/repo-name_id_rsa # use the path to the associated key
+
+Do the following CTRL-* commands:
+CTRL+O to save (press enter to accep the file name)
+CTRL+X to exit nano
+
+Return to your local associated git repository
+
+$ cd [path to repo] # this gets you to the repo.
+(alternately, you can do:)
+
+$ ls # list the directory contents
+$ cd [directory] # replace with a directory name from the list
+until you get where you need to go
+
+Once you're in the right place:
+
+$ git remote set-url origin git@github.com:ORG/REPO.git 
+You need to replace ORG and REPO with the github path equivalents
+$ git remote -v # to verify that the changes were applied properly
+$ ssh -T git@github.com # test SSH connection to Github. 
+
+If the test is successful, it will identify you by your username.
+
+Now you can try to push changes
+
+$ git push master origin # syntax: git push [local branch] origin
+Use the branch you're working in, in place of [local branch].

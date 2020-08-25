@@ -1,0 +1,120 @@
+This is the help file for using command line git with the Axemoor Github
+Organization. You can apply most of this workflow to any of your personal
+repositories - just adjust the remote repository to fit your needs.
+
+Notes: 
+* When you see brackets [] used in commands, you should replace the brackets
+  and text with something appropriate to what the text in the brackets says.
+  Think "Mad Libs". 
+* The # symbol is the comment designator. Anything to the right of a # will be
+  ignored by the interpreter. Comments can be all on their own line, or they can
+  follow other commands. Comments appear throughout this document at the ends
+  of commands, with extra information. You do not type the comments into the
+  command line (Caution: commenting in HTML is different.)
+* Lines of code you can type at the command line will start with a $. This
+  symbol most likely appears at the end of your command prompt. You don't need
+  to type it - it's already there!
+
+  When you begin working on a project, never assume that the copy you have
+locally is the newest copy. Always request from Github with the following
+command:
+
+$ git pull origin [branch] # Syntax: "Pull to [local] from [branch at Github]
+
+  "Origin" is the default name for your local copy. It can be changed, but if you
+change it, you have to remember what you changed it to! You want to enter this
+command while in the working folder for your project.
+
+  You should rarely-to-never directly make changes to the main branch. (it is
+sometimes called the "master" branch - you can choose what to call it) The main
+branch should only contain code that is stable and has been tested. In the case
+of web development, changes should not be merged to main until after they have
+been tested locally, [optionally tested locally by someone else], and uploaded 
+and tested on the production webserver. 
+  In order to keep untested code out of the main branch, we develop it in a 
+different branch. You can work on different parts of the same website by using 
+different branches for the different parts.
+  Quick fixes, like officer name changes, should be done via their own branch.
+You could create and designate an "Updates" branch for that purpose. You will
+have an easier time if, once you merge the Updates branch into the main branch,
+you delete the Updates branch and later on re-create it for the next batch of
+updates. 
+
+  Before you begin working on a branch that already exists (example: a design
+project that is taking more than one coding session to create and test) you
+should pull down the Github copy. 
+
+$ git pull origin [branch] # yes, this is identical to the one above
+$ git checkout [branch] # to make sure you're working in the right branch
+
+  You can verify that you're in the correct branch at any time by typing
+
+$ git status
+
+  Now you can edit your local copy. Make some changes. Periodically while
+you're working, whenever you're going to step away from your computer for more
+than a minute or two, and when you're done working, commit your changes
+locally:
+
+$ git add [name of file] # this adds one file
+or
+$ git add [path to project directory] # this adds all of the files in the dir
+
+  You can then do
+
+$ git status # (optional) to make sure that all the right files have been added
+
+  Then do:
+
+$ git commit # a text editor will launch. Type a commit message, then save.
+
+  Your commit message should be somehow relevant to the changes you have made.
+The first line will appear in the file listing on Github as the last change.
+Any additional lines will appear in the extended commit message. You can be as
+detailed as you want. If you're making save-and-continue commits, they can be
+less descriptive. The commit you make before you're done for the day is the
+important one. The commit message tells everyone (including your future self)
+what you were working on in this batch.
+
+  When you are done working for the day, and your final commit is in, push your
+changes to Github with:
+
+$ git push [branch] origin # "Push to [branch@github] from [local]"
+
+  Git will report on its attempt to push your changes to Github. If it says
+"success", you are done! If you get an error, you may need to troubleshoot. If
+you aren't sure how to fix it, copy the error text and paste it into a search
+engine. Chances are good that someone else has asked the Internet about this
+before, and the answer is out there.
+
+  Now you can go to Github and it should report that commits were pushed to
+[branch] recently. All of your changes will be there. If you are ready to test
+your changes, it is a good idea to get another person to test/review your
+changes. 
+  The first step in getting changes added to the main branch is to
+create a pull request. You'll do this on the Github website. From the main
+repository page, change to your branch (there's a pull-down menu on the left
+side, just above the file list). You should see a bar near the top that says,
+"This branch is [number] commits ahead, [number] commits behind [main branch].
+At the right-hand end is a link that says "pull request". Click that, then
+draft a request message. 
+  Be descriptive - the title bar should describe what kind of changes (example: 
+created new page for award descriptions) and the comment box should have a 
+more verbose version of that. List what kind of content you added. If it does 
+something interactive, describe what it should do (so it can be tested). 
+  Your reviewer should be able to know, from the pull request message, what 
+they should be testing. If you want to specify a particular reviewer, you can 
+add them to the reviewers list in the right column (click the gear). 
+  When you are done, click the "create pull request" button below the comment 
+box. Once a pull request has been created, it will appear in the Pull Requests
+tab. 
+If you were fixing something documented in an Issue (a ticket), you can go
+to that issue and link it to the pull request, and when the pull request gets
+merged, the ticket will be automatically closed. 
+ 
+  Remember that if you break something, all is not lost! You can always start
+a new development environment from scratch and you'll only have a few steps to
+take to get back up and running. It is recommended that you back up your SSH
+keys onto a flash drive that you keep in an accessible but safe place.
+Otherwise, you'll need to generate new keys and re-add them to Github.
+

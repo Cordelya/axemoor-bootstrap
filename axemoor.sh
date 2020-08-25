@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# process flags
+#
+# Axemoor git workflow
+
+
 echo "Hi! You found the help system, but it isn't ready yet.
 In the mean time, try the following command:
 
