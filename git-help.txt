@@ -79,7 +79,7 @@ what you were working on in this batch.
   When you are done working for the day, and your final commit is in, push your
 changes to Github with:
 
-$ git push [branch] origin # "Push to [branch@github] from [local]"
+$ git push origin [branch] # "Push from [local] to [branch]" 
 
   Git will report on its attempt to push your changes to Github. If it says
 "success", you are done! If you get an error, you may need to troubleshoot. If
