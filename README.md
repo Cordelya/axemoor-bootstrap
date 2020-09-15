@@ -6,9 +6,11 @@ If you are helping to test these, make sure you grab from the appropriate branch
 
 This is a collection of bash scripts and help files designed to facilitate setting up a web development environment on a new linux install for Axemoor webministers, with heavy support for git on the CLI.
 Built on and for Ubuntu and/or Raspbian. May work with other distros. Open a new issue to tell me about how it went with a different OS and we'll see about adding compatibility.
+Designed to be used on "fresh" OS installs, and may not work as expected on a system that has been used, especially if configs have been changed. If you're using such a system and you're familiar with it, review the script before you run it.
 
 ## Notes for those using this file
 * Command line input is denoted by a leading $. This refers to the default use of $ as the command prompt on *nix systems. Don't type the $, just start right after it.
+* Likewise, any text that follows a # symbol is a comment and is disregarded by the system, so you don't need to type it in.
 * You may be able to copy/paste. CTRL-C/V/X don't work in the terminal (not without changing some settings first). You can copy/paste into or out of terminal using right-clicks
     * Select text outside of a terminal window and CTRL-C or use the right-click -> Copy context menu. Return focus to the terminal and right-click. What you copied will be pasted at the command prompt. If you are pasting in a password, it won't show up - you just have to take it on faith and see what happens.
     * Select text inside a terminal window by highlighting with your mouse, then right-click. It will be copied to the clipboard and you can paste it outside of the Terminal window. This will come in handy if you encounter an error when installing.
@@ -21,7 +23,7 @@ Built on and for Ubuntu and/or Raspbian. May work with other distros. Open a new
         * installed directly on a computer (not tested yet)
         * in a VM (not tested yet)
         * in Windows 10 Subsystem for Linux (minimal testing has been done at this time - needs work)
-        * on a Raspberry Pi (testing in progress)
+        * on a Raspberry Pi (not tested yet)
     * Debian:
         * Raspbian on a Raspberry Pi (mostly stable)
 * If using a freshly-burned Raspberry Pi distro, let it initialize and if it offers to update, let it do that as well. 
@@ -53,7 +55,7 @@ $ ubuntu-init.sh # this begins the install and config process
 $ bash *****-init.sh # run the init script (use the right file name) with "bash" preceding it
 ````
 
-The first line downloads the file. The second line makes it executable. The third line runs the file. You may be prompted to enter the password for the user *root*, so have it handy. The file will install all of the necessary software, do initial webserver configuration, and do initial git configuration, including making a new directory, "help" and cloning this repository to that location, which gives you access to the help files\[[1](#help)\]. Expect the install portion to take some time. Go do something else for 10 minutes and come back.
+The first line downloads the file. The second line makes it executable. The third line runs the file. You may be prompted to enter your system user account password, so have it handy. The file will install all of the necessary software, do initial webserver configuration, and do initial git configuration, including making a new directory, "help" and cloning this repository to that location, which gives you access to the help files\[[1](#help)\]. Expect the install portion to take some time. Go do something else for 10 minutes and come back.
 
 ## End-user intervention
 There are some actions you, the user must take before you are fully set up. They are:
