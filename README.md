@@ -1,5 +1,8 @@
 # Bootstrapping a Dev Environment for Axemoor
 
+## This repository has moved to GitLab. Please visit [Cordelya's GitLab](https://gitlab.com/cordelya) and you'll find the active project there.
+- Please also note that this project has been abandoned due to no longer being needed.
+
 **CAUTION: This repo is still under initial development and is untested. Do not follow these instructions until this line disappears from this file**
 
 If you are helping to test these, make sure you grab from the appropriate branch for the time being.
